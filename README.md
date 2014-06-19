@@ -29,3 +29,8 @@ To use laser_scan_matcher to publish odom frame. The results are a lot worse.
 The result looks like:
 
 ![only laser image](https://raw.githubusercontent.com/awesomebytes/turtlebot_laser_work/master/map_from_only_laser.png)
+
+To use this last one you must clone:
+https://github.com/ccny-ros-pkg/scan_tools
+
+and compile it in your workspace (laser_scan_matcher is there).
