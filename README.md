@@ -14,3 +14,9 @@ And it will launch all the necesarry stuff:
 * needed transforms (base_footprint to laser_link)
 * rviz to watch what is happening
 
+Also you can try
+```
+roslaunch turtlebot_laser_work launch_laser_only.launch
+```
+
+To use laser_scan_matcher to publish odom frame. The results are a lot worse.
