@@ -1,0 +1,6 @@
+<launch>
+	<include file="$(find turtlebot_laser_work)/launch/odom_pub_and_sensor_play.launch"/>
+	<include file="$(find turtlebot_laser_work)/launch/tf_static.launch"/>
+	<include file="$(find turtlebot_laser_work)/launch/gmapping.launch.xml"/>
+	<include file="$(find turtlebot_laser_work)/launch/rviz.launch"/>
+</launch>

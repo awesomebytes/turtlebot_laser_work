@@ -1,0 +1,52 @@
+<launch>
+	<node pkg="turtlebot_laser_work" type="play_with_current_time.py" name="data_publisher" />
+  <arg name="scan_topic" default="scan" />
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <param name="base_frame" value="base_link"/>
+    <param name="odom_frame" value="odom"/>
+    <param name="map_update_interval" value="5.0"/>
+    <param name="maxUrange" value="6.0"/>
+    <param name="maxRange" value="8.0"/>
+    <param name="sigma" value="0.05"/>
+    <param name="kernelSize" value="1"/>
+    <param name="lstep" value="0.05"/>
+    <param name="astep" value="0.05"/>
+    <param name="iterations" value="5"/>
+    <param name="lsigma" value="0.075"/>
+    <param name="ogain" value="3.0"/>
+    <param name="lskip" value="0"/>
+    <param name="srr" value="0.01"/>
+    <param name="srt" value="0.02"/>
+    <param name="str" value="0.01"/>
+    <param name="stt" value="0.02"/>
+    <param name="linearUpdate" value="0.5"/>
+    <param name="angularUpdate" value="0.436"/>
+    <param name="temporalUpdate" value="-1.0"/>
+    <param name="resampleThreshold" value="0.5"/>
+    <param name="particles" value="80"/>
+    <param name="xmin" value="-1.0"/>
+    <param name="ymin" value="-1.0"/>
+    <param name="xmax" value="1.0"/>
+    <param name="ymax" value="1.0"/>
+
+    <param name="delta" value="0.05"/>
+    <param name="llsamplerange" value="0.01"/>
+    <param name="llsamplestep" value="0.01"/>
+    <param name="lasamplerange" value="0.005"/>
+    <param name="lasamplestep" value="0.005"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+  </node>
+
+	<include file="$(find turtlebot_laser_work)/launch/rviz.launch"/>
+	<!-- <node pkg="tf" type="static_transform_publisher" name="tf_base_link_base_foot_print" args="0 0 0 0 0 0 /base_footprint /base_link 50"/> -->
+	<!-- laser matcher needs base_link -->
+	<node pkg="tf" type="static_transform_publisher" name="tf_laser_base_link" args="0.6 0 0 0 0 0 /base_link /laser_link 50"/>
+    <!-- scan matcher to publish odom -->
+	 <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" 
+	    name="laser_scan_matcher_node" output="screen">
+	    <param name="fixed_frame" value="odom"/>
+	    <param name="use_alpha_beta" value="true"/>
+	    <param name="max_iterations" value="10"/>
+	  </node>
+</launch>

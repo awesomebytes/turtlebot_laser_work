@@ -1,0 +1,6 @@
+<launch>
+	<!-- launch the node that generates odometry data and TF from wheels info -->
+	<node pkg="turtlebot_laser_work" type="odom_pub" name="odom_pub"/>
+	<!-- launch the "bag player" with the data from the matlab files exported to csv -->
+	<node pkg="turtlebot_laser_work" type="play_with_current_time.py" name="data_publisher" />
+</launch>

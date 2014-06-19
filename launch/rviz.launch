@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="rviz" type="rviz" name="rviz_laser_mapping" args="-d $(find turtlebot_laser_work)/rviz/mapping_rviz.rviz"/>
+</launch>
